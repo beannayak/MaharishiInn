@@ -7,8 +7,13 @@ package mum.maharishi.maharishiinn.others;
 
 import java.util.ArrayList;
 import java.util.List;
+import mum.maharishi.maharishiinn.domain.User;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -37,21 +42,48 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-//        String name = authentication.getName();
-//        String password = authentication.getCredentials().toString();
-//
-//        if (name.equals("name") && password.equals("password")) {
-//            List<GrantedAuthority> grantedAuths = new ArrayList<>();
-//            grantedAuths.add(new SimpleGrantedAuthority("Role_USER"));
-//            Authentication auth = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
-//            return auth;
-//
-//        } else {
-//            return null;
-//        }
+        String name = authentication.getName();
+        String password = authentication.getCredentials().toString();
+        String newPassword = null;
+        String passAuthority = null;
+        
+        List<GrantedAuthority> grantedAuths = new ArrayList<>();
+        if (sf != null) {
+            System.out.println("user is notNull");
+            Session session;
+            try {
+                session = sf.openSession();
+                Transaction tx = session.beginTransaction();
+                Query query = session.createQuery("from User where userName = :uname");
+                query.setParameter("uname", name);
 
-        return null;
+                User user = (User) query.list().get(0);
+                newPassword = user.getPassword();
+                passAuthority = user.getAuthorities();
+                
+                tx.commit();
+            } catch (Exception e) {
+                System.out.println("Exception occured: " + e.getMessage());
+            }
 
+        } else {
+            System.out.println("sf is null");
+        }
+
+        if (name.equals("binayak") && password.equals("123")) {
+            grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+        } else if (name.equals("rinju") && password.equals("123")) {
+            grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+        } else if (newPassword != null){
+            if (newPassword.equals(password)){
+                grantedAuths.add(new SimpleGrantedAuthority(passAuthority));
+            }
+        } else {
+            throw new BadCredentialsException("Bad Credentials");
+        }
+
+        Authentication auth = new UsernamePasswordAuthenticationToken(name, password, grantedAuths);
+        return auth;
     }
 
     @Override
