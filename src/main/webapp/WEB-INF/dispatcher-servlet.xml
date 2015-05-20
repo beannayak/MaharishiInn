@@ -7,7 +7,7 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:util="http://www.springframework.org/schema/util"
-       xmlns:task="http://www.springframework.org/schema/task"
+       
        xmlns:mvc="http://www.springframework.org/schema/mvc"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
@@ -17,30 +17,16 @@
            http://www.springframework.org/schema/context/spring-context-3.0.xsd
            http://www.springframework.org/schema/mvc
            http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd
-           http://www.springframework.org/schema/task
-           http://www.springframework.org/schema/task/spring-task-4.0.xsd
-       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd"
-       >
+       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
     <bean class="org.springframework.web.servlet.mvc.support.ControllerClassNameHandlerMapping"/>
     
-    
-    <!-- DispatcherServlet Context: defines this servlet's request-processing
-    infrastructure -->
-
-    <!-- Enables the Spring MVC @Controller programming model -->
-    <!--@repo, @controll @-->
+    <!-- Rinzu -To (i) add this line above 2 lines of mvc and context should be added. 
+    (ii) add 4 lines of context,spring-context-3.0.xsd, mvc and spring-mvc-3.0.xsd inside "xsi:schemaLocation="-->
     <mvc:annotation-driven />
-    <!--bean banaune kaam-->
     <context:component-scan base-package="mum.maharishi.maharishiinn" />
-    <context:annotation-config /> 
-    <!--autowire bean vitra ko-->
-      
-    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
-        <property name="sessionFactory" ref="sessionFactory" />
-    </bean>
-
-    <tx:annotation-driven transaction-manager="transactionManager" />
+    <context:annotation-config />
+    
     
     <!--
     Most controllers will use the ControllerClassNameHandlerMapping above, but
@@ -48,18 +34,38 @@
     define an explicit mapping for it.
     -->
 
-    <!-- Resolves views selected for rendering by @Controllers to .jsp resources
-    in the /WEB-INF/views directory -->
+
     <bean id="viewResolver"
           class="org.springframework.web.servlet.view.InternalResourceViewResolver"
           p:prefix="/WEB-INF/jsp/"
           p:suffix=".jsp" />
+
+    <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+        <property name="defaultLocale" value="en"/>
+    </bean>
+
+    <mvc:interceptors>
+        <bean class= "org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+            <property name="paramName" value="language"/>
+        </bean>
+    </mvc:interceptors>
+
+    <bean id= "messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+        <property name="basename" value="messages"/>
+    </bean>
     
-    <!--<bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>-->
+    <bean id="txManager"
+          class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory" />
+    </bean>
     
+    <tx:annotation-driven transaction-manager="txManager" proxy-target-class="true"/>
     
-    <!-- Handles HTTP GET requests for /web-resources/** by efficiently serving
-    up static resources in the ${webappRoot}/resources/ directory -->
     <mvc:resources mapping="/resources/**" location="/resources/" />
-       
+    
+    <bean class="org.springframework.web.servlet.view.BeanNameViewResolver"/>
+	
+    <aop:aspectj-autoproxy proxy-target-class="true" />
+    
+    
 </beans>

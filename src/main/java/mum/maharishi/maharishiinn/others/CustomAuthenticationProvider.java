@@ -25,7 +25,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
- * @author sajana
+ * @author binayak
  */
 @Component
 @Transactional(propagation = Propagation.REQUIRES_NEW)
@@ -47,7 +47,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String newPassword = null;
         String passAuthority = null;
         
+        System.out.println("Reached Here 90909090909");
         List<GrantedAuthority> grantedAuths = new ArrayList<>();
+//        no session found for current thread exception
         if (sf != null) {
             System.out.println("user is notNull");
             Session session;

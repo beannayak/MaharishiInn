@@ -8,15 +8,14 @@
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     
     <beans:bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
-    <beans:bean id="customAuthentationProvider" class="mum.maharishi.maharishiinn.others.CustomAuthenticationProviderustomAuthentationProvider" >
+    <beans:bean id="customAuthentationProvider" class="mum.maharishi.maharishiinn.others.CustomAuthenticationProvider" >
         <beans:constructor-arg ref="sessionFactory" />
     </beans:bean>
     
-    <http>        
-<!--        <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
-        
+    <http>
+        <intercept-url pattern="/" access="ROLE_USER" />
         <form-login login-page="/login" authentication-failure-url="/login" default-target-url="/" />
-        <logout logout-success-url="/login" />-->
+        <logout logout-success-url="/login" />
     </http>
     
     <authentication-manager>

@@ -17,24 +17,23 @@
         <h1>Login!</h1>
         <section>
             <div class="dataList">
-                <c:url var="actionUrl" value="login" />
-                <form:form id="loginForm" commandName="user" method="post"
-                           action="${actionUrl }" class="pure-form pure-form-aligned">
+                <c:url var="actionUrl" value='j_spring_security_check' />
+                <form method="post" action="${actionUrl }" class="pure-form pure-form-aligned">
 
                     <fieldset>
                         <legend></legend>
 
                         <div class="pure-control-group">
                             <label for="userName">Username</label>
-                            <form:input path="userName" placeholder="User Name" />
+                            <input type="text" name="j_username" />
                         </div>
                         <div class="pure-control-group">
                             <label for="password">Password</label>
-                            <form:input  path="password"  placeholder="Password" />
+                            <input type="password"  name="j_password" />
                         </div>
                         <input type="submit" value="Login"/>
                     </fieldset>
-                </form:form>
+                </form>
             </div>
         </section>
 
