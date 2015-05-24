@@ -21,15 +21,14 @@
     <body>
         <div class="pure-menu pure-menu-horizontal">
             <ul class="pure-menu-list">
-                <c:url var="destination" value="/destination/" />
+                <c:url var="about" value="/login" />
                 <li class="pure-menu-item"><a href="" class="pure-menu-heading">About Us</a></li>
-                    <c:url var="destination" value="/destination/listAll" />
-                <li class="pure-menu-item"><a href="${destination}" class="pure-menu-link">Contact Us</a></li>
-                    <c:url var="adventure" value="/adventure/listAll" />
-                <li class="pure-menu-item pure-menu-selected"><a href="${adventure}" class="pure-menu-link">All Rooms</a></li>
-                <li class="pure-menu-item"><a href="#" class="pure-menu-link">Contact</a></li>
-                    <c:url var="region" value="/region/listAll" />
-                <li class="pure-menu-item pure-menu-selected"><a href="${region}" class="pure-menu-link">Reserve</a></li>
+                    <c:url var="contact" value="" />
+                <li class="pure-menu-item"><a href="" class="pure-menu-link">Contact Us</a></li>
+                    <c:url var="rooms" value="" />
+                <li class="pure-menu-item pure-menu-selected"><a href="" class="pure-menu-link">All Rooms</a></li>
+                    <c:url var="reserve" value="/reservation/listAll" />
+                <li class="pure-menu-item pure-menu-selected"><a href="${reservation}" class="pure-menu-link">Reservations</a></li>
                     <c:url var="login" value="/login" />
                 <li class="pure-menu-item pure-menu-selected"><a href="${login}" class="pure-menu-link">login</a></li>
             </ul>

@@ -72,9 +72,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
             System.out.println("sf is null");
         }
 
-        if (name.equals("binayak") && password.equals("123")) {
+        if (name.equals("admin") && password.equals("admin")) {
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-        } else if (name.equals("rinju") && password.equals("123")) {
+        } else if (name.equals("user") && password.equals("user")) {
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
         } else if (newPassword != null){
             if (newPassword.equals(password)){

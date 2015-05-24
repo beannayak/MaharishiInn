@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,9 +24,13 @@ public class User {
     private String userName;
     private String password;
     private String authorities;
+    
+    @OneToOne
+    private UserInformation userInfo;
 
     public User() {
     }
+    
 
     public User(String name, String password, String authorities) {
         this.userName = name;
@@ -64,7 +69,16 @@ public class User {
     public void setAuthorities(String authorities) {
         this.authorities = authorities;
     }
-    
+
+    public UserInformation getUserInfo() {
+        return userInfo;
+    }
+
+    public void setUserInfo(UserInformation userInfo) {
+        this.userInfo = userInfo;
+    }
+
+        
     
     
     

@@ -37,6 +37,12 @@
             </div>
         </section>
 
+        <div class="modal-footer">
+            <div class="col-md-12">
+                <span class="pull-left"><a href="#">Forgot Password?</a></span> <span><a
+                        href="#">Register</a></span>
+            </div>
+        </div>
         <%@include file="templates/footer.jsp"%>
     </body>
 
