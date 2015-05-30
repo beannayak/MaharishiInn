@@ -8,21 +8,23 @@
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
     
     <beans:bean id="webexpressionHandler" class="org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler" />
-    <!--    <beans:bean id="customAuthentationProvider" class="mum.maharishi.maharishiinn.others.CustomAuthenticationProvider" >
+    <beans:bean id="customAuthentationProvider" class="mum.maharishi.maharishiinn.others.CustomAuthenticationProvider" >
         <beans:constructor-arg ref="sessionFactory" />
-    </beans:bean>-->
+    </beans:bean>
     
     <http>
         <intercept-url pattern="/admin/**" access="ROLE_ADMIN" />
+        
+        <access-denied-handler error-page="/403" />
         <form-login login-page="/login" authentication-failure-url="/login" default-target-url="/" />
         <logout logout-success-url="/login" />
     </http>
     
-    <!--    <authentication-manager>
-        <authentication-provider ref="customAuthentationProvider" />
-    </authentication-manager>-->
-    
     <authentication-manager>
+        <authentication-provider ref="customAuthentationProvider" />
+    </authentication-manager>
+    
+    <!--<authentication-manager>
         <authentication-provider>
             <jdbc-user-service 
                     data-source-ref="dataSource"
@@ -31,6 +33,6 @@
             />
         </authentication-provider>
     </authentication-manager>
-        
+        -->
 </beans:beans>
 

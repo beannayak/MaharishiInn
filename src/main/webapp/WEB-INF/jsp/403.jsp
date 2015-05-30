@@ -2,20 +2,21 @@
 <html>
 <body>
 
-	<%@ include file="common/header.jsp"%>
+	<%@ include file="templates/header.jsp"%>
 
 	<div class="jumbotron">
 		<div class="container">
 
 			<h1>HTTP Status 403 - Access denied</h1>
 
+                        <p>       | <%= request.getUserPrincipal().getName() %> |</p>
 			<c:choose>
-				<c:when test="${empty username}">
+				<c:when test="${empty principal.username}">
 					<h2>You do not have permission to access this page!</h2>
 				</c:when>
 				<c:otherwise>
 					<h2>
-						Username : ${username} <br><br>You do not have permission to access
+						Username : ${principal.username} <br><br>You do not have permission to access
 						this page!
 					</h2>
 				</c:otherwise>

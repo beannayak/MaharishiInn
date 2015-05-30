@@ -55,4 +55,9 @@ public class rootController {
         
         return "index";
     }
+    
+    @RequestMapping("/403")
+    public String errorneous(){
+        return "403";
+    }
 }

@@ -46,10 +46,9 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
         String newPassword = null;
         String passAuthority = null;
-        
-        System.out.println("Reached Here 90909090909");
+
         List<GrantedAuthority> grantedAuths = new ArrayList<>();
-//        no session found for current thread exception
+
         if (sf != null) {
             System.out.println("user is notNull");
             Session session;
@@ -62,7 +61,7 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
                 User user = (User) query.list().get(0);
                 newPassword = user.getPassword();
                 passAuthority = user.getAuthorities();
-                
+
                 tx.commit();
             } catch (Exception e) {
                 System.out.println("Exception occured: " + e.getMessage());
@@ -73,11 +72,11 @@ public class CustomAuthenticationProvider implements AuthenticationProvider {
         }
 
         if (name.equals("admin") && password.equals("admin")) {
-            grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
-        } else if (name.equals("user") && password.equals("user")) {
             grantedAuths.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
-        } else if (newPassword != null){
-            if (newPassword.equals(password)){
+        } else if (name.equals("user") && password.equals("user")) {
+            grantedAuths.add(new SimpleGrantedAuthority("ROLE_USER"));
+        } else if (newPassword != null) {
+            if (newPassword.equals(password)) {
                 grantedAuths.add(new SimpleGrantedAuthority(passAuthority));
             }
         } else {
