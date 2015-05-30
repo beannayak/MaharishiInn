@@ -11,6 +11,7 @@ import mum.maharishi.maharishiinn.dao.GenericDao;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -19,7 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
  */
 
 @Repository
-@Transactional
+@Transactional (propagation = Propagation.MANDATORY)
 public class GenericDaoImpl<T, PK extends Serializable> implements GenericDao<T, PK> {
 
     @Autowired

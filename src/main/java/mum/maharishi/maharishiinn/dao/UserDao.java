@@ -33,5 +33,8 @@ public class UserDao {
         }
         return null;
     }
-
+    
+    public void saveUser(User user){
+        sf.getCurrentSession().persist(user);
+    }
 }

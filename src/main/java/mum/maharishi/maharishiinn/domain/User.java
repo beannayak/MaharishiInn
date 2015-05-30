@@ -24,14 +24,22 @@ public class User {
     private String userName;
     private String password;
     private String authorities;
+    private boolean enable;
     
     @OneToOne
     private UserInformation userInfo;
 
     public User() {
     }
-    
 
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+    
     public User(String name, String password, String authorities) {
         this.userName = name;
         this.password = password;
