@@ -10,12 +10,17 @@ import mum.maharishi.maharishiinn.domain.UserInformation;
 import mum.maharishi.maharishiinn.domain.jptDomain;
 import mum.maharishi.maharishiinn.service.UserInformationService;
 import mum.maharishi.maharishiinn.service.UserService;
+import mum.maharishi.maharishiinn.service.jptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 /**
  *
@@ -28,6 +33,9 @@ public class rootController {
     
     @Autowired
     UserService us;
+    
+    @Autowired
+    jptService js;
     
     @RequestMapping ("/")
     public String welcomeDisplayer(){
@@ -79,5 +87,18 @@ public class rootController {
         jptDomain a = new jptDomain(0, "nothing");
         mav.addObject("jpt", a);
         return mav;
+    }
+    
+    
+    @RequestMapping (value="/setSomething", method = RequestMethod.POST)
+    public @ResponseBody boolean addSomething(@RequestBody jptDomain jptObject){
+        js.save(jptObject);
+        return true;
+    } 
+    
+    @RequestMapping (value="/delete/jptDomain/{id}", method = RequestMethod.DELETE)
+    public void deleteItem(@PathVariable long id){
+        js.deleteByID(id);
+        //return "redirect:/gimmeSomething";
     }
 }

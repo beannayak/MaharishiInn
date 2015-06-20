@@ -73,7 +73,7 @@
         <property name="contextPath" value="mum.maharishi.maharishiinn.domain" />
     </bean>
     
-    <!--    <bean id="marshallingHttpMessageConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
+    <bean id="marshallingHttpMessageConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
         <property name="marshaller" ref="marshaller"/>
         <property name="unmarshaller" ref="marshaller"/>
     </bean>
@@ -84,7 +84,7 @@
                 <ref bean="marshallingHttpMessageConverter"/>
             </util:list>
         </property>
-    </bean>-->
+    </bean>
     
     <bean id="marshalview" class="org.springframework.web.servlet.view.xml.MarshallingView">
         <property name="contentType" value="text/xml"/>

@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.XmlValue;
 
 /**
  *
@@ -31,7 +32,7 @@ public class jptDomain implements Serializable{
     @XmlAttribute
     private long jptDomainId;
     
-    @XmlAttribute
+    @XmlValue
     String name;
 
     public jptDomain() {
