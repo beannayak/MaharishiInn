@@ -7,12 +7,15 @@ package mum.maharishi.maharishiinn.controller;
 
 import mum.maharishi.maharishiinn.domain.User;
 import mum.maharishi.maharishiinn.domain.UserInformation;
+import mum.maharishi.maharishiinn.domain.jptDomain;
 import mum.maharishi.maharishiinn.service.UserInformationService;
 import mum.maharishi.maharishiinn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -28,6 +31,13 @@ public class rootController {
     
     @RequestMapping ("/")
     public String welcomeDisplayer(){
+        Integer i = uis.nothing(4);
+        System.out.println("value of i is: " + i);
+        jptDomain a = null;
+        
+        a = uis.something("John Snow");
+        System.out.println(a.getName());
+        
         return "index";
     }
     
@@ -37,14 +47,14 @@ public class rootController {
         System.out.println("System reached checkUserInfo");
         
         UserInformation ui = new UserInformation();
-        ui.setCity("fairfiel");
+        ui.setCity("fairfield");
         ui.setContactNo("123-456-7890");
         ui.setEmailId("bla@bla.bla");
         ui.setFirstName("bla");
         ui.setLastName("lbla");
         ui.setState("iowa");
         
-        uis.save(ui);
+        uis.save(ui); //log
         
         User user = new User();
         user.setAuthorities("ROLE_ADMIN,ROLE_USER");
@@ -60,5 +70,14 @@ public class rootController {
     @RequestMapping("/403")
     public String erroneous(){
         return "403";
+    }
+    
+    @RequestMapping (value = "/gimmeSomething", method = RequestMethod.GET)
+    public ModelAndView list(){
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("marshalview");
+        jptDomain a = new jptDomain(0, "nothing");
+        mav.addObject("jpt", a);
+        return mav;
     }
 }
