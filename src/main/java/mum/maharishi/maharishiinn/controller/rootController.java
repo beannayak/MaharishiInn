@@ -5,6 +5,7 @@
  */
 package mum.maharishi.maharishiinn.controller;
 
+import mum.maharishi.maharishiinn.domain.AnotherJptDomain;
 import mum.maharishi.maharishiinn.domain.User;
 import mum.maharishi.maharishiinn.domain.UserInformation;
 import mum.maharishi.maharishiinn.domain.jptDomain;
@@ -100,5 +101,11 @@ public class rootController {
     public void deleteItem(@PathVariable long id){
         js.deleteByID(id);
         //return "redirect:/gimmeSomething";
+    }
+    
+    @RequestMapping (value ="/getAnObject", method = RequestMethod.GET)
+    public @ResponseBody AnotherJptDomain getDomain(){
+        AnotherJptDomain a = new AnotherJptDomain(0, "nothing");
+        return a;
     }
 }

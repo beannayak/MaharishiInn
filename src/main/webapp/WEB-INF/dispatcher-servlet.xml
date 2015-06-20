@@ -91,4 +91,11 @@
         <property name="marshaller" ref="marshaller"/>
     </bean>
     
+    <bean id="getRoomPrice" class="mum.maharishi.maharishiinn.service.GetRoomPriceService" />
+    
+    <bean name="/RMI/RoomService" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter" >
+        <property name="service" ref="getRoomPrice" />
+        <property name="serviceInterface" value="mum.maharishi.maharishiinn.service.IGetRoomPriceService" />
+    </bean>
+    
 </beans>
