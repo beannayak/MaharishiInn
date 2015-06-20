@@ -9,6 +9,7 @@ import mum.maharishi.maharishiinn.domain.User;
 import mum.maharishi.maharishiinn.domain.UserInformation;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -11,6 +11,7 @@ import mum.maharishi.maharishiinn.service.UserInformationService;
 import mum.maharishi.maharishiinn.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -57,7 +58,7 @@ public class rootController {
     }
     
     @RequestMapping("/403")
-    public String errorneous(){
+    public String erroneous(){
         return "403";
     }
 }
