@@ -6,6 +6,7 @@
 package mum.maharishi.maharishiinn.controller;
 
 import mum.maharishi.maharishiinn.domain.AnotherJptDomain;
+import mum.maharishi.maharishiinn.domain.TotalJpt;
 import mum.maharishi.maharishiinn.domain.User;
 import mum.maharishi.maharishiinn.domain.UserInformation;
 import mum.maharishi.maharishiinn.domain.jptDomain;
@@ -14,11 +15,11 @@ import mum.maharishi.maharishiinn.service.UserService;
 import mum.maharishi.maharishiinn.service.jptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
@@ -42,9 +43,7 @@ public class rootController {
     public String welcomeDisplayer(){
         Integer i = uis.nothing(4);
         System.out.println("value of i is: " + i);
-        jptDomain a = null;
-        
-        a = uis.something("John Snow");
+        jptDomain a = uis.something("John Snow");
         System.out.println(a.getName());
         
         return "index";
@@ -106,6 +105,24 @@ public class rootController {
     @RequestMapping (value ="/getAnObject", method = RequestMethod.GET)
     public @ResponseBody AnotherJptDomain getDomain(){
         AnotherJptDomain a = new AnotherJptDomain(0, "nothing");
+        return a;
+    }
+    
+    @RequestMapping (value="/getJptDomain/Object", method = RequestMethod.GET )
+    public @ResponseBody jptDomain getObject(@RequestParam long id){
+        System.out.println(id);
+        return js.getById(id);
+    }
+    
+    @RequestMapping (value="/idkwhat", method = RequestMethod.GET)
+    public @ResponseBody TotalJpt getTotalJpt(){
+        //System.out.println("Reached to total value");
+        TotalJpt a = new TotalJpt();
+        a.addJptDomainA(new AnotherJptDomain(0, "Binayak"));
+        a.addJptDomainA(new AnotherJptDomain(0, "Rinju"));
+        a.addJptDomainB(new AnotherJptDomain(0, "Binayak"));
+        a.addJptDomainB(new AnotherJptDomain(0, "Rinju"));
+        
         return a;
     }
 }

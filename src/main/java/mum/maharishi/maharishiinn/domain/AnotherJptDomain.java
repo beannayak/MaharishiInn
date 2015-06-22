@@ -1,11 +1,12 @@
 package mum.maharishi.maharishiinn.domain;
 
+import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 @Entity
-public class AnotherJptDomain {
+public class AnotherJptDomain implements Serializable{
     @Id
     @GeneratedValue
     private long id;
